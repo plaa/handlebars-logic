@@ -75,6 +75,7 @@ QUnit.test( "and", function( assert ) {
   assert.equal(render("{{and b n s}}", {b:false, n:1, s:'str'}), "false");
   assert.equal(render("{{and b n s}}", {b:true, n:0, s:'str'}), "false");
   assert.equal(render("{{and b n s}}", {b:true, n:1, s:''}), "false");
+  assert.equal(render("{{and b n s}}", {n:1, s:'str'}), "false");
   assert.equal(render("{{#if (and true 1 'str')}}YES{{else}}NO{{/if}}"), "YES");
   assert.equal(render("{{#if (and true 0 'str')}}YES{{else}}NO{{/if}}"), "NO");
 });
@@ -88,6 +89,8 @@ QUnit.test( "or", function( assert ) {
   assert.equal(render("{{or b n s}}", {b:true, n:0, s:''}), "true");
   assert.equal(render("{{or b n s}}", {b:false, n:1, s:''}), "true");
   assert.equal(render("{{or b n s}}", {b:false, n:0, s:'str'}), "true");
+  assert.equal(render("{{or b n s}}", {s:'str'}), "true");
+  assert.equal(render("{{or b n s}}", {}), "false");
   assert.equal(render("{{#if (or false 1 '')}}YES{{else}}NO{{/if}}"), "YES");
   assert.equal(render("{{#if (or false 0 '')}}YES{{else}}NO{{/if}}"), "NO");
 });
@@ -97,6 +100,8 @@ QUnit.test( "not", function( assert ) {
   assert.equal(render("{{not true}}"), "false");
   assert.equal(render("{{not 1}}"), "false");
   assert.equal(render("{{not 'str'}}"), "false");
+  assert.equal(render("{{not bool}}", {bool:true}), "false");
+  assert.equal(render("{{not bool}}", {}), "true");
   assert.equal(render("{{#if (not bool)}}YES{{else}}NO{{/if}}", {bool:true}), "NO");
   assert.equal(render("{{#if (not bool)}}YES{{else}}NO{{/if}}", {bool:false}), "YES");
 });
