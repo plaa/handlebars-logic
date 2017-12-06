@@ -12,7 +12,7 @@ Operators use Lisp-style operator syntax, for example:
 
 Boolean operators:  `and` `or` (any number of arguments) `not` (one argument)
 
-Comparison operators:  `eq` `ne` `lt` `gt` `lte` `gte` (two arguments)
+Comparison operators:  `eq` `ne` `lt` `gt` `lte` `gte` (two arguments, numbers or strings)
 
 Arithmetic operators:  `sum` `sub` `mul` `div` (any number of arguments) `mod` (two arguments)
 
