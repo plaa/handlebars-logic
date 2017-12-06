@@ -92,6 +92,15 @@ QUnit.test( "or", function( assert ) {
   assert.equal(render("{{#if (or false 0 '')}}YES{{else}}NO{{/if}}"), "NO");
 });
 
+QUnit.test( "not", function( assert ) {
+  assert.equal(render("{{not false}}"), "true");
+  assert.equal(render("{{not true}}"), "false");
+  assert.equal(render("{{not 1}}"), "false");
+  assert.equal(render("{{not 'str'}}"), "false");
+  assert.equal(render("{{#if (not bool)}}YES{{else}}NO{{/if}}", {bool:true}), "NO");
+  assert.equal(render("{{#if (not bool)}}YES{{else}}NO{{/if}}", {bool:false}), "YES");
+});
+
 QUnit.test( "sum", function( assert ) {
   assert.equal(render("{{sum 1 2 3}}"), "6");
   assert.equal(render("{{sum a b c}}", {a:1, b:-2, c:3}), "2");

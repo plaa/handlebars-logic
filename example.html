@@ -36,9 +36,12 @@
     <p>
       {{#if (or (gt a 2) (gt b 2) (gt c 2))}} One of a, b, c is greater than 2 {{else}} All of a, b, c are lte 2 {{/if}}
     </p>
+    <p>
+      {{#if (not bool)}} bool is falsy {{else}} bool is truthy {{/if}}
+    </p>
 
     <!-- Arithmetic:  sum sub mul div mod -->
-    
+
     <p>
       a+b+c: {{sum a b c}}
     </p>
@@ -75,7 +78,8 @@
       b: 2,
       c: 3,
       str1: 'abc',
-      str2: 'xyz'
+      str2: 'xyz',
+      bool: true
     };
     var data2 = {
       const: {
@@ -86,7 +90,8 @@
       b: 5,
       c: 2,
       str1: 'foo',
-      str2: 'bar'
+      str2: 'bar',
+      bool: false
     };
 
     var compiled = Handlebars.compile(document.getElementById('template').text);

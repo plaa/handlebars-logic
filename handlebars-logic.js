@@ -24,8 +24,11 @@ Handlebars.registerHelper({
   and: function () {
     return Array.prototype.slice.call(arguments, 0, arguments.length - 1).every(Boolean);
   },
-  or: function (v1, v2) {
+  or: function () {
     return Array.prototype.slice.call(arguments, 0, arguments.length - 1).some(Boolean);
+  },
+  not: function(bool) {
+    return !bool;
   },
 
   // Arithmetic
