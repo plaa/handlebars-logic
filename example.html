@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<!--
+  Download this file and handlebars-logic.js to your computer and open in a browser
+-->
+
+<head>
+  <title>Handlebars-logic example</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+  <script src="handlebars-logic.js"></script>
+</head>
+
+<body>
+
+  <script id="template" type="text/x-handlebars-template">
+    <h2>a: {{a}} b: {{b}} c: {{c}}</h2>
+
+    <!-- Numeric comparisons:  eq ne lt gt lte gte -->
+
+    <p>
+      {{#if (gt const.pi 3)}} pi is greater than 3 {{else}} pi is less than 3 {{/if}}
+    </p>
+    <p>
+      {{#if (lte const.e 2)}} e is less than 2 {{else}} e is greater than 2 {{/if}}
+    </p>
+    <p>
+      {{#if (lt str1 str2)}} {{str1}} is before {{str2}} {{else}} {{str1}} is after {{str2}} {{/if}}
+    </p>
+
+    <!-- Boolean logic:  and or -->
+
+    <p>
+      {{#if (and (lt a 4) (lt b 4) (lt c 4))}} a, b, c are less than 4 {{else}} One of a, b, c is gte 4 {{/if}}
+    </p>
+    <p>
+      {{#if (or (gt a 2) (gt b 2) (gt c 2))}} One of a, b, c is greater than 2 {{else}} All of a, b, c are lte 2 {{/if}}
+    </p>
+
+    <!-- Arithmetic:  sum sub mul div mod -->
+    
+    <p>
+      a+b+c: {{sum a b c}}
+    </p>
+    <p>
+      a-b-c: {{sub a b c}}
+    </p>
+    <p>
+      a*b*c: {{mul a b c}}
+    </p>
+    <p>
+      a/b/c: {{div a b c}}
+    </p>
+    <p>
+      b % c: {{mod b c}}
+    </p>
+    <p>
+      a + (b*c + 3): {{sum a (sum (mul b c) 3)}}
+    </p>
+    <p>
+      a + (b*c + 3) > 10: {{#if (gt (sum a (sum (mul b c) 3)) 10)}} YES {{else}} NO {{/if}}
+    </p>
+  </script>
+
+  <div id="content1"></div>
+  <div id="content2"></div>
+
+  <script>
+    var data1 = {
+      const: {
+        pi: 3.1415926536,
+        e: 2.7182818285
+      },
+      a: 1,
+      b: 2,
+      c: 3,
+      str1: 'abc',
+      str2: 'xyz'
+    };
+    var data2 = {
+      const: {
+        pi: 3.1415926536,
+        e: 2.7182818285
+      },
+      a: 3,
+      b: 5,
+      c: 2,
+      str1: 'foo',
+      str2: 'bar'
+    };
+
+    var compiled = Handlebars.compile(document.getElementById('template').text);
+    var rendered1 = compiled(data1);
+    var rendered2 = compiled(data2);
+    document.getElementById('content1').innerHTML = rendered1;
+    document.getElementById('content2').innerHTML = rendered2;
+  </script>
+
+</body>
+</html>
